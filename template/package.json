@@ -1,0 +1,19 @@
+{
+	"name": "static-grunt",
+	"version": "0.1.0",
+	"dependencies": {},
+	"engines": {
+		"node": ">=0.8.x"
+	},
+	"devDependencies": {
+		"grunt-contrib-requirejs": "~0.x.x",
+        "grunt-templater": ">=0.0.4-1",
+		"grunt-contrib-compass": "~0.x.x",
+		"grunt": "~0.4.x",
+		"grunt-contrib-watch": "~0.x.x",
+		"grunt-contrib-jshint": "~0.x.x",
+		"grunt-contrib-livereload": "0.x.x",
+		"requirejs": "~2.x.x",
+        "jade": ">=0.31.x"
+	}
+}

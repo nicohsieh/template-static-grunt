@@ -1,0 +1,64 @@
+{
+	"name": "static-grunt",
+	"version": "0.1.0",
+	"author": "Kyle Phillips",
+	"description": "A template for building static generated sites with the use of [grunt v0.4.0](http://gruntjs.com) and [consolidated](http://github.com/visionmedia/consolidated.js)",
+	"fetch": {
+		"animitter": {
+			"file": "https://raw.github.com/hapticdata/animitter/master/animitter.js",
+			"target": "public/javascripts/vendor/animitter.js"
+		},
+		"async": {
+			"file": "https://raw.github.com/caolan/async/master/lib/async.js",
+			"target": "public/javascripts/vendor/async.js"
+		},
+		"modernizr": {
+			"file": "https://raw.github.com/Modernizr/Modernizr/master/modernizr.js",
+			"target": "public/javascripts/vendor/modernizr.js"
+		},
+		"jquery": {
+			"file": "http://code.jquery.com/jquery.js",
+			"target": "public/javascripts/vendor/jquery.js"
+		},
+		"datgui": {
+			"clone": "https://code.google.com/p/dat-gui/",
+			"target": {
+				"src/dat": "public/javascripts/vendor/dat"
+			}
+		},
+		"require": {
+			"file": "https://raw.github.com/jrburke/requirejs/master/require.js",
+			"target": "public/javascripts/vendor/require.js"
+		},
+		"domReady": {
+			"file": "https://raw.github.com/requirejs/domReady/master/domReady.js",
+			"target": "public/javascripts/vendor/domReady.js"
+		},
+		"text": {
+			"file": "https://raw.github.com/requirejs/text/master/text.js",
+			"target": "public/javascripts/vendor/text.js"
+		},
+		"toxi": {
+			"clone": "https://github.com/hapticdata/toxiclibsjs.git",
+			"target": {
+				"lib/toxi": "public/javascripts/vendor/toxi"
+			}
+		},
+		"Stats": {
+			"file": "https://raw.github.com/mrdoob/stats.js/master/src/Stats.js",
+			"target": "public/javascripts/vendor/Stats.js"
+		},
+		"three": {
+			"file": "https://raw.github.com/mrdoob/three.js/master/build/three.js",
+			"target": "public/javascripts/vendor/three.js"
+		},
+		"Backbone": {
+			"file": "https://raw.github.com/documentcloud/backbone/master/backbone.js",
+			"target": "public/javascripts/vendor/backbone.js"
+		},
+		"underscore": {
+			"file": "https://raw.github.com/documentcloud/underscore/master/underscore.js",
+			"target": "public/javascripts/vendor/underscore.js"
+		}
+	}
+}

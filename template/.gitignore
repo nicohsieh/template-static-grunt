@@ -1,0 +1,6 @@
+/.idea/
+.sass-cache
+node_modules/
+# ignore the built css files
+public/stylesheets/*.css
+public/*.html

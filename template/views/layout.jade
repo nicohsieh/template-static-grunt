@@ -1,0 +1,21 @@
+doctype 5
+mixin requireApp(  main )
+    - if( typeof main === 'undefined' ){
+        - main = 'app/main';
+    - }
+    script(type="text/javascript").
+        require(['javascripts/config'],function (){
+            require(['#{main}'], function (app){
+                if( typeof app === 'function' ){
+                    app( document.body );
+                }
+            });
+        });
+html
+  head
+    title= title
+    link(rel='stylesheet', href='/stylesheets/style.css').
+    script(src="javascripts/vendor/require.js").
+    mixin requireApp()
+  body
+    block content
