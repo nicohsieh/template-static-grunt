@@ -1,4 +1,4 @@
-module.exports = function(grunt){
+module.exports = function(grunt) {
 	grunt.initConfig({
 		// compile .scss/.sass to .css using Compass
 		// http://compass-style.org/help/tutorials/configuration-reference/#configuration-properties
@@ -14,8 +14,8 @@ module.exports = function(grunt){
 		// https://github.com/cowboy/grunt/blob/master/docs/task_lint.md#specifying-jshint-options-and-globals
 		jshint: {
 			all: [
-				'Gruntfile.js',
-				'public/javascripts/**/*.js'
+					'Gruntfile.js',
+					'public/javascripts/**/*.js'
 			],
 			options: {
 				es5: true, //use ecmascript5 mode
@@ -31,7 +31,7 @@ module.exports = function(grunt){
 				globals: {
 					module: true, //commonjs global
 					define: true, //AMD global
-					require: true,//AMD + CommonJS global
+					require: true, //AMD + CommonJS global
 					console: true //turn this to false when supporting real-old browsers
 				}
 			}
@@ -52,13 +52,12 @@ module.exports = function(grunt){
 					pragmasOnSave: {
 						excludeJade: true
 					},
-					modules: [
-						{
+					modules: [{
 							name: 'app/main',
 							exclude: [
-								'jquery',
-								'backbone',
-								'underscore'
+									'jquery',
+									'backbone',
+									'underscore'
 							]
 						}
 					]
@@ -67,39 +66,39 @@ module.exports = function(grunt){
 		},
 		//better-than-watch
 		watch: {
-            options: {
-                livereload: true
-            },
+			options: {
+				livereload: true
+			},
 			stylesheets: {
 				files: [
-					'sass/*.{scss,sass}'
+						'sass/*.{scss,sass}'
 				],
 				tasks: 'compass'
 			},
-            views: {
-                files: [
-                    'views/*'
-                ],
-                tasks: 'template'
-            }
+			views: {
+				files: [
+						'views/*'
+				],
+				tasks: 'template'
+			}
 		},
-        //watch templates using consolidated.js
-        //setup for jade but can use many templating engines: https://github.com/rockwood/grunt-templater#supported-template-engines
-        template: {
-            index: {
-                src: 'views/index.jade',
-                dest: 'public/index.html',
-                variables: {
-                    title: "Index - Sketchplate",
-                    pretty: true
-                }
-            }
-        }
+		//watch templates using consolidated.js
+		//setup for jade but can use many templating engines: https://github.com/rockwood/grunt-templater#supported-template-engines
+		template: {
+			index: {
+				src: 'views/index.jade',
+				dest: 'public/index.html',
+				variables: {
+					title: "Index - Sketchplate",
+					pretty: true
+				}
+			}
+		}
 	});
-    grunt.loadNpmTasks('grunt-contrib-watch');
+	grunt.loadNpmTasks('grunt-contrib-watch');
 	grunt.loadNpmTasks('grunt-contrib-requirejs');
 	grunt.loadNpmTasks('grunt-contrib-compass');
-    grunt.loadNpmTasks('grunt-contrib-jshint');
-    grunt.loadNpmTasks('grunt-templater');
-	grunt.registerTask('default', ['compass', 'template','jshint','watch']);
+	grunt.loadNpmTasks('grunt-contrib-jshint');
+	grunt.loadNpmTasks('grunt-templater');
+	grunt.registerTask('default', ['compass', 'template', 'jshint', 'watch']);
 };
