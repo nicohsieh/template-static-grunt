@@ -15,10 +15,13 @@ module.exports = function(grunt) {
 		jshint: {
 			all: [
 					'Gruntfile.js',
-					'public/javascripts/**/*.js'
+                    'public javascripts/*.js',
+					'public/javascripts/**/*.js',
+                    //ignore vendor libraries
+                    '!public/javascripts/vendor/*.js',
+                    '!public/javascripts/vendor/**/*.js'
 			],
 			options: {
-				es5: true, //use ecmascript5 mode
 				curly: true, //use curly braces even on one-liners
 				eqeqeq: true, //use strict equality (===, !==)
 				immed: true, //wrap self-invoking functions in parentheses
@@ -100,5 +103,5 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-contrib-compass');
 	grunt.loadNpmTasks('grunt-contrib-jshint');
 	grunt.loadNpmTasks('grunt-templater');
-	grunt.registerTask('default', ['compass', 'template', 'jshint', 'watch']);
+	grunt.registerTask('default', ['compass', 'template', 'jshint']);
 };

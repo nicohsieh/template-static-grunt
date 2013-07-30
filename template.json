@@ -3,6 +3,10 @@
 	"version": "0.1.0",
 	"author": "Kyle Phillips",
 	"description": "A template for building static generated sites with the use of [grunt v0.4.0](http://gruntjs.com) and [consolidated](http://github.com/visionmedia/consolidated.js)",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/hapticdata/template-static-grunt.git"
+    },
 	"fetch": {
 		"animitter": {
 			"file": "https://raw.github.com/hapticdata/animitter/master/animitter.js",
@@ -11,10 +15,6 @@
 		"async": {
 			"file": "https://raw.github.com/caolan/async/master/lib/async.js",
 			"target": "public/javascripts/vendor/async.js"
-		},
-		"modernizr": {
-			"file": "https://raw.github.com/Modernizr/Modernizr/master/modernizr.js",
-			"target": "public/javascripts/vendor/modernizr.js"
 		},
 		"jquery": {
 			"file": "http://code.jquery.com/jquery.js",
