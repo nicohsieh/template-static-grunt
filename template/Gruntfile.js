@@ -103,5 +103,5 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-contrib-compass');
 	grunt.loadNpmTasks('grunt-contrib-jshint');
 	grunt.loadNpmTasks('grunt-templater');
-	grunt.registerTask('default', ['compass', 'template', 'jshint']);
+	grunt.registerTask('default', ['compass', 'template']);
 };
