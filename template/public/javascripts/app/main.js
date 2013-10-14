@@ -1,4 +1,4 @@
 define(function( require ){
-	return function app(){
-	};
+    return function app(){
+    };
 });
