@@ -1,27 +1,34 @@
 module.exports = function(grunt) {
 	grunt.initConfig({
+        pkg: grunt.file.readJSON('package.json'),
+        options: {
+            src: 'public/'
+        },
 		// compile .scss/.sass to .css using Compass
 		// http://compass-style.org/help/tutorials/configuration-reference/#configuration-properties
+        // https://github.com/gruntjs/grunt-contrib-compass
 		compass: {
 			dist: {
 				options: {
-					cssDir: 'public/stylesheets',
+					cssDir: '<%= options.src %>stylesheets',
 					sassDir: 'sass'
 				}
 			}
 		},
 		// specifying JSHint options and globals
-		// https://github.com/cowboy/grunt/blob/master/docs/task_lint.md#specifying-jshint-options-and-globals
+        // http://jshint.org
+        // https://github.com/gruntjs/grunt-contrib-jshint
 		jshint: {
 			all: [
 					'Gruntfile.js',
-                    'public javascripts/*.js',
-					'public/javascripts/**/*.js',
+                    '<%= options.src %>javascripts/*.js',
+					'<%= options.src %>javascripts/**/*.js',
                     //ignore vendor libraries
-                    '!public/javascripts/vendor/*.js',
-                    '!public/javascripts/vendor/**/*.js'
+                    '!<%= options.src %>javascripts/vendor/*.js',
+                    '!<%= options.src %>javascripts/vendor/**/*.js'
 			],
 			options: {
+                camelcase: true, //force all variable names to either cameCalse or UPPER_CASE
 				curly: true, //use curly braces even on one-liners
 				eqeqeq: true, //use strict equality (===, !==)
 				immed: true, //wrap self-invoking functions in parentheses
@@ -31,6 +38,7 @@ module.exports = function(grunt) {
 				undef: true, //prohibit the use of undeclared variables (spot leaks + globals)
 				eqnull: true, //suppress warnings about using "== null"
 				browser: true, //define globals exposed by modern browsers
+                maxlen: 150, //generously allowing 150 characters per line, try to stick to standard gutter of 80
 				globals: {
 					module: true, //commonjs global
 					define: true, //AMD global
@@ -39,7 +47,9 @@ module.exports = function(grunt) {
 				}
 			}
 		},
-		//compile requirejs files for production
+		// compile requirejs files for production
+        // http://requirejs.org
+        // https://github.com/gruntjs/grunt-contrib-requirejs
 		requirejs: {
 			compile: {
 				options: {
@@ -67,41 +77,71 @@ module.exports = function(grunt) {
 				}
 			}
 		},
-		//better-than-watch
+        // use the jade template engine to stay DRY
+        // http://jade-lang.com
+        // https://github.com/gruntjs/grunt-contrib-jade
+        jade: {
+            //these are any client-side templates you choose to have,
+            //they become one AMD module at javascripts/templates.js
+            client: {
+                files: {
+                    '<%= options.src %>javascripts/templates.js': [
+                        //any client-side templates go here
+                    ]
+                },
+                options: {
+                    compileDebug: false,
+                    amd: true,
+                    //namespace: false,
+                    processName: function(filename){
+                        //take out the "views/" path
+                        //and the .jade at the end
+                        return filename.slice(0, -('.jade'.length)).slice('views/'.length,filename.length);
+                    },
+                    client: true
+                }
+            },
+            pages: {
+                files: {
+                    '<%= options.src %>index.html': ['views/index.jade']
+                },
+                options: {
+                    //the data for every template is read from a locals module
+                    data: function( dest, src ){
+                        return require('./locals');
+                    }
+                }
+            }
+        },
+        // watch your files for changes
+        // https://github.com/gruntjs/grunt-contrib-watch
 		watch: {
 			options: {
-				livereload: true
 			},
 			stylesheets: {
-				files: [
-						'sass/*.{scss,sass}'
-				],
+				files: [ '<%= compass.dist.options.sassDir %>/*.{scss,sass}' ],
 				tasks: 'compass'
 			},
 			views: {
-				files: [
-						'views/*'
-				],
-				tasks: 'template'
-			}
-		},
-		//watch templates using consolidated.js
-		//setup for jade but can use many templating engines: https://github.com/rockwood/grunt-templater#supported-template-engines
-		template: {
-			index: {
-				src: 'views/index.jade',
-				dest: 'public/index.html',
-				variables: {
-					title: "Index - Sketchplate",
-					pretty: true
-				}
-			}
+				files: [ 'views/*' ],
+				tasks: 'jade'
+			},
+            livereload: {
+                //watch the output files, not the pre-processed
+                files: ['<%= compass.dist.options.cssDir %>/*.css','<%= Object.keys(jade.pages.files) %>'],
+                options: {
+                    livereload: true
+                }
+            }
 		}
 	});
-	grunt.loadNpmTasks('grunt-contrib-watch');
-	grunt.loadNpmTasks('grunt-contrib-requirejs');
-	grunt.loadNpmTasks('grunt-contrib-compass');
-	grunt.loadNpmTasks('grunt-contrib-jshint');
-	grunt.loadNpmTasks('grunt-templater');
-	grunt.registerTask('default', ['compass', 'template']);
+
+    //load all of the NPM Tasks out of the package.json
+    Object.keys(require('./package.json').devDependencies).forEach(function(dep){
+        if( dep.match(/grunt-/) ){
+            grunt.loadNpmTasks(dep);
+        }
+    });
+
+	grunt.registerTask('default', ['compass', 'jade']);
 };

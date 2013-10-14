@@ -1,7 +1,4 @@
-define([
-	'jquery'
-], function( $ ){
+define(function( require ){
 	return function app(){
-
 	};
 });
