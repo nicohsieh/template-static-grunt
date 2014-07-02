@@ -1,6 +1,6 @@
 {
 	"name": "static-grunt",
-	"version": "0.2.0",
+	"version": "0.2.1",
 	"author": "Kyle Phillips",
 	"description": "A template for building static-generated sites with the use of [grunt](http://gruntjs.com), [compass](http://compass-style.org) and [jade](http://jade-lang.com)",
     "repository": {
