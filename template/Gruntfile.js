@@ -132,6 +132,10 @@ module.exports = function(grunt) {
                 options: {
                     livereload: true
                 }
+            },
+            hint: {
+                files: [ '<%= options.src %>/javascripts/app/**/*.js' ],
+                tasks: 'jshint'
             }
         }
     });
